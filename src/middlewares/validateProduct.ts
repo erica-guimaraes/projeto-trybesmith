@@ -1,13 +1,36 @@
 import { NextFunction, Request, Response } from 'express';
 
-export const validateProduct = (req: Request, res: Response, next: NextFunction) => {
-  const { name, price, orderId } = req.body;
-  if (!name || !price || !orderId) {
-    return res.status(400).json({ message: 'Check required fields' });
+export const validateName = (req: Request, res: Response, next: NextFunction) => {
+  const { name } = req.body;
+  if (!name) {
+    return { status: 400, data: { message: '"name" is required' },
+    };
+  }
+  if (typeof name !== 'string') {
+    return { status: 422, data: { message: '"name" must be a string' } };
+  }
+  if (name.length <= 2) {
+    return { status: 422, data: { message: '"name" length must be at least 3 characters long' } };
+  }
+  next();
+};
+
+export const validatePrice = (req: Request, res: Response, next: NextFunction) => {
+  const { price } = req.body;
+  if (!price) {
+    return { status: 400, data: { message: '"price" is required' },
+    };
+  }
+  if (typeof price !== 'string') {
+    return { status: 422, data: { message: '"price" must be a string' } };
+  }
+  if (price.length <= 2) {
+    return { status: 422, data: { message: '"price" length must be at least 3 characters long' } };
   }
   next();
 };
 
 export default {
-  validateProduct,
+  validateName,
+  validatePrice,
 };
