@@ -15,7 +15,7 @@ Promise<ServiceResponse<ProductResponse>> {
 async function getAllProducts(): Promise<ServiceResponse<Product[]>> {
   const allProducts = await ProductModel.findAll();
   const data = allProducts.map((product) => product.dataValues);
-  return { status: 'SUCCESS', data };
+  return { status: 'SUCCESSFUL', data };
 }
 
 export default {

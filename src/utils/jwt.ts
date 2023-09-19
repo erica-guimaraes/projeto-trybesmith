@@ -4,7 +4,7 @@ const secret = process.env.JWT_SECRET || 'secret';
 
 type TokenPayload = {
   id: number,
-  email: string,
+  username: string,
 };
 
 const createToken = (payload: TokenPayload): string => {
